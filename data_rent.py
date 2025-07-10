@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
 
-# ✅ Load data from raw GitHub CSV
+# ✅ Load data from raw GitHub CSV with proper encoding
 csv_url = "https://raw.githubusercontent.com/Pritesh-Lathiya/Office/main/Data-Rent.csv"
-df = pd.read_csv(csv_url)
+df = pd.read_csv(csv_url, encoding="utf-8")
 
 # 🏢 Page title
 st.title("🏢 Office Rental Finder")
