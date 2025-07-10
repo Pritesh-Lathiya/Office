@@ -29,12 +29,17 @@ st.sidebar.header("Filter by Square Feet")
 min_sqft = int(df['SQ FT'].min())
 max_sqft = int(df['SQ FT'].max())
 
-sqft_range = st.sidebar.slider(
-    "Select Range (sq ft)", 
-    min_value=min_sqft, 
-    max_value=max_sqft, 
-    value=(min_sqft, max_sqft)
-)
+# ✅ Safe slider even when only one SQ FT value
+if min_sqft == max_sqft:
+    st.sidebar.info(f"Only one office listed with {min_sqft} sq ft.")
+    sqft_range = (min_sqft, max_sqft)
+else:
+    sqft_range = st.sidebar.slider(
+        "Select Range (sq ft)",
+        min_value=min_sqft,
+        max_value=max_sqft,
+        value=(min_sqft, max_sqft)
+    )
 
 # 🔎 Filter data
 filtered_df = df[(df['SQ FT'] >= sqft_range[0]) & (df['SQ FT'] <= sqft_range[1])]
