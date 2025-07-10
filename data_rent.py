@@ -11,7 +11,7 @@ import streamlit as st
 import pandas as pd
 
 # Load data from GitHub CSV
-csv_url = "https://raw.githubusercontent.com/your-username/your-repo/main/office_data.csv"
+csv_url = "https://github.com/Pritesh-Lathiya/Office/blob/main/Data-Rent.csv"
 df = pd.read_csv(csv_url)
 
 # Page title
