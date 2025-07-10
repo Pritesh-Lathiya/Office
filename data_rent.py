@@ -7,7 +7,7 @@ data = {
     "AREA": ["RING ROAD"],
     "SQ FT": [250],
     "RENT": [35000],
-    "PHOTOS": ["https://drive.google.com/uc?export=view&id=1tvh7J0pioaA-FpldBPvT-ATSCcdz0in1"],  # use direct image URL here
+    "PHOTOS": ["https://drive.google.com/uc?export=view&id=1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W"],  # use direct image URL here
     "MESSAGE": [
         """🧾 Fully Furnished Office for Rent – Empire State Building
 📍 Location: M-12, Empire State Building, Near Udhna Darwaja
