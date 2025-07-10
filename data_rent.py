@@ -1,13 +1,13 @@
 import streamlit as st
 import pandas as pd
 
-# ✅ Embed the office data directly
+# ✅ Embed office data directly
 data = {
     "PROPERTY ADDRESS": ["EMPIRE STATE BUILDING"],
     "AREA": ["RING ROAD"],
     "SQ FT": [250],
     "RENT": [35000],
-    "PHOTOS": ["https://drive.google.com/file/d/1photoId/view?usp=sharing"],
+    "PHOTOS": ["https://images.unsplash.com/photo-1582407947304-fd86f028f716"],  # use direct image URL here
     "MESSAGE": [
         """🧾 Fully Furnished Office for Rent – Empire State Building
 📍 Location: M-12, Empire State Building, Near Udhna Darwaja
@@ -18,18 +18,18 @@ data = {
     ]
 }
 
-# Convert to DataFrame
+# Load into DataFrame
 df = pd.DataFrame(data)
 
 # 🏢 App Title
 st.title("🏢 Office Rental Finder")
 
-# 🔍 Sidebar filter
+# 📏 Filter Setup
 st.sidebar.header("Filter by Square Feet")
 min_sqft = int(df['SQ FT'].min())
 max_sqft = int(df['SQ FT'].max())
 
-# ✅ Safe slider even when only one SQ FT value
+# 👇 Handle slider with one value
 if min_sqft == max_sqft:
     st.sidebar.info(f"Only one office listed with {min_sqft} sq ft.")
     sqft_range = (min_sqft, max_sqft)
@@ -44,18 +44,18 @@ else:
 # 🔎 Filter data
 filtered_df = df[(df['SQ FT'] >= sqft_range[0]) & (df['SQ FT'] <= sqft_range[1])]
 
-# 📌 Show match count
+# ✅ Result count
 st.success(f"{len(filtered_df)} office(s) match your filter.")
 
-# 📝 Display office details
+# 📝 Display each result
 for _, row in filtered_df.iterrows():
     with st.expander(f"📍 {row['PROPERTY ADDRESS']} - {row['AREA']} ({row['SQ FT']} sq ft)"):
         st.write(f"**Rent:** ₹{row['RENT']}")
-        
-        # Show message in multi-line format
+
+        # Rich description
         if pd.notna(row['MESSAGE']):
             st.markdown(f"<div style='white-space: pre-wrap;'>{row['MESSAGE']}</div>", unsafe_allow_html=True)
-        
-        # Show photo link
+
+        # 📷 Inline image
         if pd.notna(row['PHOTOS']) and row['PHOTOS'].startswith("http"):
-            st.markdown(f"[📷 View Photos]({row['PHOTOS']})", unsafe_allow_html=True)
+            st.image(row['PHOTOS'], caption="📷 Office Photo", use_column_width=True)
