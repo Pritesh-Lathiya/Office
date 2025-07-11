@@ -61,7 +61,7 @@ st.success(f"{len(filtered_df)} office(s) match your filter.")
 # --- Display Listings ---
 for _, row in filtered_df.iterrows():
     with st.expander(f"📍 {row['PROPERTY ADDRESS']} - {row['AREA']} ({row['SQ FT']} sq ft)"):
-        st.write(f"**Rent:** ₹{row['RENT']}")
+        #       st.write(f"**Rent:** ₹{row['RENT']}")
         st.markdown(f"<div style='white-space: pre-wrap;'>{row['MESSAGE']}</div>", unsafe_allow_html=True)
 
         photos = row["PHOTOS"]
