@@ -17,7 +17,7 @@ def get_drive_image_url(file_id_or_link):
         file_id = file_id_or_link
     return f"https://drive.google.com/uc?export=download&id={file_id}"
 
-# Common office data
+# Common office data (same for all 15)
 office_data = {
     "PROPERTY ADDRESS": "EMPIRE STATE BUILDING",
     "AREA": "RING ROAD",
@@ -35,24 +35,21 @@ office_data = {
 ✅ 1 Staff Cabin"""
 }
 
-# Streamlit Page Settings
+# Set wide layout
 st.set_page_config(page_title="Office Listings", layout="wide")
 st.title("🏢 Office Listings")
-
-# Sidebar filter (for visual purpose)
 st.sidebar.header("🔍 Filter by Square Feet")
 st.sidebar.info("Only one office listed with 250 sq ft.")
 
-# 3 Columns: Each for 1 Office
-col1, col2, col3 = st.columns(3)
-
-for col in [col1, col2, col3]:
-    with col.expander(f"📍 {office_data['PROPERTY ADDRESS']} - {office_data['AREA']} ({office_data['SQ FT']} sq ft)"):
+# Show 15 vertical office listings (same data repeated)
+for i in range(1, 16):
+    with st.expander(f"📍 {office_data['PROPERTY ADDRESS']} - {office_data['AREA']} ({office_data['SQ FT']} sq ft)"):
         st.write(f"**Rent:** ₹{office_data['RENT']}")
         st.markdown(f"<div style='white-space: pre-wrap;'>{office_data['MESSAGE']}</div>", unsafe_allow_html=True)
 
         photos = office_data["PHOTOS"]
 
+        # Manually display 2x2 photo grid (no loop)
         row1 = st.columns(2)
         with row1[0]:
             st.image(Image.open(BytesIO(requests.get(get_drive_image_url(photos[0])).content)), use_container_width=True)
