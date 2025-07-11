@@ -24,10 +24,14 @@ data = {
     "SQ FT": [250],
     "RENT": [35000],
     "PHOTOS": [[
-        "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8", "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8",
-        "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8", "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8",
-        "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8", "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8",
-        "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8", "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8"
+        "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W", "1yVNJwjT4Vz58h6WuB5fCZbQc9TOlHQjV",
+        "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W", "1yVNJwjT4Vz58h6WuB5fCZbQc9TOlHQjV",
+        "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W", "1yVNJwjT4Vz58h6WuB5fCZbQc9TOlHQjV",
+        "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W", "1yVNJwjT4Vz58h6WuB5fCZbQc9TOlHQjV",
+        "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W", "1yVNJwjT4Vz58h6WuB5fCZbQc9TOlHQjV",
+        "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W", "1yVNJwjT4Vz58h6WuB5fCZbQc9TOlHQjV",
+        "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W", "1yVNJwjT4Vz58h6WuB5fCZbQc9TOlHQjV",
+        "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W", "1yVNJwjT4Vz58h6WuB5fCZbQc9TOlHQjV"
     ]],
     "MESSAGE": [
         """🧾 Fully Furnished Office for Rent – Empire State Building
@@ -43,7 +47,7 @@ df = pd.DataFrame(data)
 
 # --- UI ---
 st.set_page_config(page_title="Office Listings", layout="centered")
-st.title("🏢 Office For Sale")
+st.title("🏢 Office Listings")
 st.sidebar.header("🔍 Filter by Square Feet")
 
 min_sqft = df['SQ FT'].min()
@@ -61,7 +65,7 @@ st.success(f"{len(filtered_df)} office(s) match your filter.")
 # --- Display Listings ---
 for _, row in filtered_df.iterrows():
     with st.expander(f"📍 {row['PROPERTY ADDRESS']} - {row['AREA']} ({row['SQ FT']} sq ft)"):
-        #       st.write(f"**Rent:** ₹{row['RENT']}")
+        st.write(f"**Rent:** ₹{row['RENT']}")
         st.markdown(f"<div style='white-space: pre-wrap;'>{row['MESSAGE']}</div>", unsafe_allow_html=True)
 
         photos = row["PHOTOS"]
