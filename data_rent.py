@@ -43,7 +43,7 @@ df = pd.DataFrame(data)
 
 # --- UI ---
 st.set_page_config(page_title="Office Listings", layout="centered")
-st.title("🏢 Office Listings")
+st.title("🏢 Office For Sale")
 st.sidebar.header("🔍 Filter by Square Feet")
 
 min_sqft = df['SQ FT'].min()
