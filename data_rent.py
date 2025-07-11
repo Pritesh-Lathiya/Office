@@ -54,7 +54,7 @@ import requests
 from io import BytesIO
 
 # Extract file ID from the Google Drive link
-file_id = "1wv0MJY2uGT-HCFRugxPNEnWOG6RpF7Ml"
+file_id = "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W"
 image_url = f"https://drive.google.com/uc?export=download&id={file_id}"
 
 # Fetch the image
