@@ -45,3 +45,23 @@ for _, row in filtered_df.iterrows():
         st.markdown(f"<div style='white-space: pre-wrap;'>{row['MESSAGE']}</div>", unsafe_allow_html=True)
         if pd.notna(row['PHOTOS']) and row['PHOTOS'].startswith("http"):
             st.image(row['PHOTOS'], caption="📷 Office Photo", use_container_width=True)
+
+
+
+import streamlit as st
+from PIL import Image
+import requests
+from io import BytesIO
+
+# Extract file ID from the Google Drive link
+file_id = "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W"
+image_url = f"https://drive.google.com/uc?export=download&id={file_id}"
+
+# Fetch the image
+response = requests.get(image_url)
+if response.status_code == 200:
+    img = Image.open(BytesIO(response.content))
+    st.image(img, caption="Office Photo", use_container_width=True)
+else:
+    st.error("Failed to load image.")
+
