@@ -24,10 +24,10 @@ data = {
     "SQ FT": [250],
     "RENT": [35000],
     "PHOTOS": [[
-        "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W", "1yVNJwjT4Vz58h6WuB5fCZbQc9TOlHQjV",
-        "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W", "1yVNJwjT4Vz58h6WuB5fCZbQc9TOlHQjV",
-        "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W", "1yVNJwjT4Vz58h6WuB5fCZbQc9TOlHQjV",
-        "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W", "1yVNJwjT4Vz58h6WuB5fCZbQc9TOlHQjV"
+        "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8", "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8",
+        "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8", "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8",
+        "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8", "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8",
+        "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8", "1gELoXJO1Akj3heW0QRJHWLshRPfA7tl8"
     ]],
     "MESSAGE": [
         """🧾 Fully Furnished Office for Rent – Empire State Building
