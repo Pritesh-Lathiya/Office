@@ -22,7 +22,7 @@ data = {
 df = pd.DataFrame(data)
 
 # Streamlit UI
-st.title("🏢 Office Rental Finder")
+st.title("Office For Sale")
 st.sidebar.header("Filter by Square Feet")
 
 min_sqft = int(df['SQ FT'].min())
