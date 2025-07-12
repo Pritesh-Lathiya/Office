@@ -31,7 +31,7 @@ image_folder = "Photos"
 for idx, row in filtered_df.iterrows():
     sr_no = row['Sr. No.']
     with st.expander(f"📍 {row['PROPERTY ADDRESS']} - {row['AREA']} ({row['SQ FT']} sq ft)"):
-        st.markdown(f"**Rent:** ₹{row['RENT']}")
+        #st.markdown(f"**Rent:** ₹{row['RENT']}")
         st.markdown(f"<div style='white-space: pre-wrap;'>{row['MESSAGE']}</div>", unsafe_allow_html=True)
 
         # Look for all images starting with <Sr. No.>_ in Photos folder
