@@ -46,11 +46,16 @@ for idx, row in filtered_df.iterrows():
                             st.warning(f"Image load failed: {photo_urls[i + j]}")
 
 
+import streamlit as st
+
 st.subheader("🔍 Google Drive Image Test")
 
+# Correct Google Drive image ID
 image_id = "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W"
-test_url = f"https://drive.google.com/uc?export=view&id={image_id}"
+test_url = f"https://drive.google.com/uc?export=download&id={image_id}"
 
-# Show image URL for debug
-st.markdown(f"**Image URL:** {test_url}")
+# Show the URL for debugging
+st.markdown(f"**Image URL:** [{test_url}]({test_url})")
+
+# Display image
 st.image(test_url, caption="Image from Google Drive", use_container_width=True)
