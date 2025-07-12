@@ -27,7 +27,7 @@ def load_image_from_drive(file_id):
     return Image.open(BytesIO(response.content))
 
 # ---- LOAD DATA ----
-df = pd.read_csv(CSV_URL)
+df = pd.read_csv(CSV_URL, encoding="utf-8-sig")
 df["PHOTOS"] = df["PHOTOS"].apply(lambda x: [i.strip() for i in str(x).split(",") if i.strip()])
 
 # ---- UI LAYOUT ----
