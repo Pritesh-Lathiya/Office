@@ -48,14 +48,15 @@ for idx, row in filtered_df.iterrows():
 
 import streamlit as st
 
-st.subheader("🔍 Google Drive Image Test")
+import streamlit as st
 
-# Correct Google Drive image ID
+st.subheader("📷 Google Drive Image Display")
+
+# Correct Google Drive Image ID
 image_id = "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W"
-test_url = f"https://drive.google.com/uc?export=download&id={image_id}"
 
-# Show the URL for debugging
-st.markdown(f"**Image URL:** [{test_url}]({test_url})")
+# Use export=view to make it renderable
+image_url = f"https://drive.google.com/uc?export=view&id={image_id}"
 
-# Display image
-st.image(test_url, caption="Image from Google Drive", use_container_width=True)
+st.markdown(f"**Image URL:** [{image_url}]({image_url})")
+st.image(image_url, caption="Image from Google Drive", use_container_width=True)
