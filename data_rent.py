@@ -15,7 +15,7 @@ df = pd.read_csv(csv_url)
 
 # Type filter (e.g., House, Office, Plot)
 property_types = df['Type'].dropna().unique().tolist()
-selected_type = st.sidebar.radio("Select Property Type", ["All"] + property_types)
+selected_type = st.radio("Select Property Type", ["All"] + property_types)
 
 # Filter by selected type
 if selected_type != "All":
