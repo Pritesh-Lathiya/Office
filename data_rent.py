@@ -19,7 +19,7 @@ st.success(f"{len(df)} office(s) match your filter.")
 
 # Show each office listing
 for idx, row in df.iterrows():
-    with st.expander(f"📍 {row['PROPERTY']} - {row['AREA']} ({row['SQ FT']} sq ft)"):
+    with st.expander(f"📍 {row['PROPERTY ADDRESS']} - {row['AREA']} ({row['SQ FT']} sq ft)"):
         st.markdown(f"**Rent:** ₹{row['RENT']}")
         st.markdown(row['MESSAGE'])
 
