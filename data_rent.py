@@ -54,3 +54,22 @@ for idx, row in filtered_df.iterrows():
                             st.image(image_files[i + j], use_container_width=True)
         else:
             st.warning("🚫 No photos for this property.")
+
+
+import streamlit as st
+import pandas as pd
+
+# Google Sheet details
+sheet_id = "1AKDnUYb0fgHLrtnPdEeHj9LmzeuN7wLHgnvUZaH15B0"
+sheet_name = "Sheet1"  # Change if your sheet name is different
+
+# Construct public CSV export URL
+csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
+
+# Load data
+df = pd.read_csv(csv_url)
+
+# Show two columns
+st.subheader("🔎 Preview Office Sale Data")
+st.dataframe(df[["Sr. No.", "PROPERTY ADDR AREA"]])
+
