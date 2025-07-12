@@ -1,23 +1,40 @@
 import streamlit as st
 import pandas as pd
-import requests
-from io import BytesIO
+import os
+from PIL import Image
 
-# Set Streamlit app settings
+# Set page config
 st.set_page_config(page_title="Office Listings", layout="centered")
 st.title("🏢 Office Listings")
 st.sidebar.header("🔍 Filter by Square Feet")
 
-# Load Excel file from GitHub (ensure it's raw link!)
-excel_url = "https://raw.githubusercontent.com/Pritesh-Lathiya/Office/main/Data-Rent.xlsx"
-df = pd.read_excel(excel_url, sheet_name="Data-Rent", engine="openpyxl")
+# Sample image list from Photos folder
+photo_dir = "Photos"
+photo_files = [os.path.join(photo_dir, f) for f in os.listdir(photo_dir) if f.endswith(('.png', '.jpg', '.jpeg', '.webp'))]
+photos = (photo_files * 8)[:16]  # repeat to ensure 16 images
 
-# Ensure 'PHOTOS' column is string and split by comma
-df["PHOTOS"] = df["PHOTOS"].astype(str).apply(lambda x: [f"https://drive.google.com/uc?export=view&id={id.strip()}" for id in x.split(",")])
+# Create mock DataFrame for 15 offices
+data = {
+    "PROPERTY ADDRESS": ["EMPIRE STATE BUILDING"] * 15,
+    "AREA": ["RING ROAD"] * 15,
+    "SQ FT": [250] * 15,
+    "RENT": [35000] * 15,
+    "PHOTOS": [photos] * 15,
+    "MESSAGE": [
+        """🧾 Fully Furnished Office for Rent – Empire State Building
+📍 Location: M-12, Empire State Building, Near Udhna Darwaja
 
-# Sidebar SQ FT Filter
-min_sqft = int(df['SQ FT'].min())
-max_sqft = int(df['SQ FT'].max())
+✔️ Office Features:
+✅ 1 Big Boss Cabin
+✅ 1 Staff Cabin"""
+    ] * 15
+}
+
+df = pd.DataFrame(data)
+
+# --- Sidebar Filter ---
+min_sqft = df['SQ FT'].min()
+max_sqft = df['SQ FT'].max()
 
 if min_sqft == max_sqft:
     st.sidebar.info(f"Only one office listed with {min_sqft} sq ft.")
@@ -28,26 +45,21 @@ else:
 filtered_df = df[(df['SQ FT'] >= sqft_range[0]) & (df['SQ FT'] <= sqft_range[1])]
 st.success(f"{len(filtered_df)} office(s) match your filter.")
 
-# Display Listings
+# --- Display Listings (Vertical, Lazy-load Images) ---
 for idx, row in filtered_df.iterrows():
     with st.expander(f"📍 {row['PROPERTY ADDRESS']} - {row['AREA']} ({row['SQ FT']} sq ft)"):
-        st.markdown(f"**Rent:** ₹{row['RENT']}")
+        st.write(f"**Rent:** ₹{row['RENT']}")
         st.markdown(f"<div style='white-space: pre-wrap;'>{row['MESSAGE']}</div>", unsafe_allow_html=True)
 
-        photo_urls = row["PHOTOS"]
-        for i in range(0, len(photo_urls), 2):
-            cols = st.columns(2)
-            for j in range(2):
-                if i + j < len(photo_urls):
-                    with cols[j]:
-                        try:
-                            st.image(photo_urls[i + j], use_container_width=True)
-                        except:
-                            st.warning(f"Image load failed: {photo_urls[i + j]}")
-
-
-
-
-# Show image directly
-st.image(image_url, caption="Image from Google Drive", use_container_width=True)
-
+        photos = row["PHOTOS"]
+        for i in range(0, len(photos), 4):
+            row1 = st.columns(2)
+            with row1[0]:
+                st.image(photos[i], use_container_width=True)
+            with row1[1]:
+                st.image(photos[i+1], use_container_width=True)
+            row2 = st.columns(2)
+            with row2[0]:
+                st.image(photos[i+2], use_container_width=True)
+            with row2[1]:
+                st.image(photos[i+3], use_container_width=True)
