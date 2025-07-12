@@ -71,5 +71,5 @@ df = pd.read_csv(csv_url)
 
 # Show two columns
 st.subheader("🔎 Preview Office Sale Data")
-st.dataframe(df[["Sr. No.", "PROPERTY ADDR AREA"]])
+st.dataframe(df[["Sr. No.", "PROPERTY ADDRESS"]])
 
