@@ -48,15 +48,33 @@ for idx, row in filtered_df.iterrows():
 
 import streamlit as st
 
-import streamlit as st
+    import streamlit as st
+    import requests
+    from PIL import Image  # Optional: If you want to use PIL for more complex image handling
 
-st.subheader("📷 Google Drive Image Display")
+    def display_image_from_google_drive(file_id):
+        url = f"https://drive.google.com/uc?export=view&id={file_id}"
+        try:
+            response = requests.get(url)
+            response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
+            # Method 1: Display using bytes (no need for PIL)
+            st.image(response.content, caption=f"Image from Google Drive (ID: {file_id})")
 
-# Correct Google Drive Image ID
-image_id = "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W"
+            # Method 2: (Requires PIL)
+            # image = Image.open(io.BytesIO(response.content))
+            # st.image(image, caption=f"Image from Google Drive (ID: {file_id})")
 
-# Use export=view to make it renderable
-image_url = f"https://drive.google.com/uc?export=view&id={image_id}"
+        except requests.exceptions.RequestException as e:
+            st.error(f"Error fetching image: {e}")
+        except Exception as e:
+            st.error(f"An unexpected error occurred: {e}")
 
-st.markdown(f"**Image URL:** [{image_url}]({image_url})")
-st.image(image_url, caption="Image from Google Drive", use_container_width=True)
+
+    # Example usage:
+    file_id_1 = "1FlbaLnpIbqk7mmrvknULUw9UxtF8msJF"  # Replace with your actual file ID
+    file_id_2 = "1FlbaLnpIbqk7mmrvknULUw9UxtF8msJF" # Replace with another file id
+    display_image_from_google_drive(file_id_1)
+    display_image_from_google_drive(file_id_2)
+
+
+    # st.image(["image_url_1", "image_url_2"], caption=["Caption 1", "Caption 2"])
