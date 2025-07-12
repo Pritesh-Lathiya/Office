@@ -53,4 +53,4 @@ for idx, row in filtered_df.iterrows():
                         with cols[j]:
                             st.image(image_files[i + j], use_container_width=True)
         else:
-            st.warning("🚫 No photos found for this property.")
+            st.warning("🚫 No photos for this property.")
