@@ -8,8 +8,15 @@ st.title("🏢 Office Listings")
 st.sidebar.header("🔍 Filter by Square Feet")
 
 # Load Excel file from GitHub (ensure it's raw link!)
-excel_url = "https://raw.githubusercontent.com/Pritesh-Lathiya/Office/main/Data-Rent.xlsx"
-df = pd.read_excel(excel_url, sheet_name="Data-Rent", engine="openpyxl")
+#excel_url = "https://raw.githubusercontent.com/Pritesh-Lathiya/Office/main/Data-Rent.xlsx"
+#df = pd.read_excel(excel_url, sheet_name="Data-Rent", engine="openpyxl")
+sheet_id = "1AKDnUYb0fgHLrtnPdEeHj9LmzeuN7wLHgnvUZaH15B0"
+sheet_name = "Sheet1"  # Or the exact sheet name from your Google Sheet
+
+csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
+
+df = pd.read_csv(csv_url)
+
 
 # Sidebar SQ FT Filter
 min_sqft = int(df['SQ FT'].min())
