@@ -38,4 +38,4 @@ for idx, row in filtered_df.iterrows():
         photo_ids = str(row['PHOTOS']).split(',')
         for file_id in photo_ids:
             image_url = get_drive_image_url(file_id)
-            st.image(image_url, use_column_width=True)
+            st.image(image_url, use_container_width=True)
