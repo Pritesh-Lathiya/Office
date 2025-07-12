@@ -15,7 +15,26 @@ df = pd.read_csv(csv_url)
 
 # Type filter (e.g., House, Office, Plot)
 property_types = df['Type'].dropna().unique().tolist()
-selected_type = st.radio("Select Property Type", ["All"] + property_types)
+
+st.markdown("**Select Property Type**")
+
+# Create 2 columns for 2x2 layout
+col1, col2 = st.columns(2)
+
+# Buttons in 2x2 grid
+with col1:
+    opt1 = st.radio(" ", ["All", "House"], index=0, key="col1_radio", label_visibility="collapsed")
+with col2:
+    opt2 = st.radio(" ", ["Office", "Plot"], index=0, key="col2_radio", label_visibility="collapsed")
+
+# Determine final selected option (only one active at a time)
+if opt1 != "All":
+    selected_type = opt1
+elif opt2 != "Office":
+    selected_type = opt2
+else:
+    selected_type = "All"
+
 
 # Filter by selected type
 if selected_type != "All":
