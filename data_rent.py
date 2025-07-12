@@ -46,15 +46,11 @@ for idx, row in filtered_df.iterrows():
                             st.warning(f"Image load failed: {photo_urls[i + j]}")
 
 
-st.subheader("🔍 Image Display Test (Google Drive)")
+st.subheader("🔍 Google Drive Image Test")
 
-# Replace with your actual file ID
-image_id = "1FlbaLnpIbqk7mmrvknULUw9UxtF8msJF"
-image_url = f"https://drive.google.com/uc?export=view&id={image_id}"
+image_id = "1LbD0FybifnYtqe4PPhuMfhC7bEex3K-W"
+test_url = f"https://drive.google.com/uc?export=view&id={image_id}"
 
-# Try to display it
-try:
-    st.image(image_url, caption="Test Image from Google Drive", use_container_width=True)
-except Exception as e:
-    st.error(f"Failed to load image: {e}")
-    st.code(image_url, language="text")
+# Show image URL for debug
+st.markdown(f"**Image URL:** {test_url}")
+st.image(test_url, caption="Image from Google Drive", use_container_width=True)
