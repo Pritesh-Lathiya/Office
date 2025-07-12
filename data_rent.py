@@ -1,41 +1,37 @@
 import streamlit as st
 import pandas as pd
-from io import StringIO
 import requests
+from io import BytesIO
 
-# URL to your GitHub raw CSV (replace with your actual GitHub raw link)
-CSV_URL = 'https://raw.githubusercontent.com/Pritesh-Lathiya/Office/main/Data-Rent.csv'
+# Title
+st.title("🏢 Office Listings")
 
-# Load data from GitHub CSV
-@st.cache_data
-def load_data():
-    response = requests.get(CSV_URL)
-    response.encoding = 'utf-8-sig'
-    return pd.read_csv(StringIO(response.text))
+# Load Excel from GitHub
+github_excel_url = "https://github.com/Pritesh-Lathiya/Office/raw/main/Data-Rent.xlsx"
+sheet_name = "Data-Rent"
 
-df = load_data()
+# Read Excel file into DataFrame
+response = requests.get(github_excel_url)
+df = pd.read_excel(BytesIO(response.content), sheet_name=sheet_name)
 
-# Helper function: convert Drive file ID to direct image view link
-def get_drive_image_url(file_id):
-    return f"https://drive.google.com/uc?export=view&id={file_id.strip()}"
+# Show number of offices
+st.success(f"{len(df)} office(s) match your filter.")
 
-# Page title
-st.markdown("## 🏢 Office Listings")
-
-# Optional filter
-sqft_filter = st.sidebar.selectbox("Filter by Square Feet", sorted(df['SQ FT'].unique()))
-filtered_df = df[df['SQ FT'] == sqft_filter]
-
-st.success(f"{len(filtered_df)} office(s) match your filter.")
-
-# Show listings
-for idx, row in filtered_df.iterrows():
-    with st.expander(f"📍 {row['PROPERTY ADDRESS']} - {row['AREA']} ({row['SQ FT']} sq ft)"):
+# Show each office listing
+for idx, row in df.iterrows():
+    with st.expander(f"📍 {row['PROPERTY']} - {row['AREA']} ({row['SQ FT']} sq ft)"):
         st.markdown(f"**Rent:** ₹{row['RENT']}")
-        st.markdown(f"{row['MESSAGE']}")
-        
-        # Show all photos (Google Drive IDs separated by commas)
-        photo_ids = str(row['PHOTOS']).split(',')
-        for file_id in photo_ids:
-            image_url = get_drive_image_url(file_id)
-            st.image(image_url, use_container_width=True)
+        st.markdown(row['MESSAGE'])
+
+        # Parse Google Drive IDs (comma-separated)
+        drive_ids = str(row['PHOTOS']).split(",")
+
+        # Loop through each ID
+        for file_id in drive_ids:
+            file_id = file_id.strip()
+            if file_id:
+                img_url = f"https://drive.google.com/uc?export=view&id={file_id}"
+                try:
+                    st.image(img_url, caption=file_id, use_container_width=True)
+                except Exception as e:
+                    st.error(f"Image load failed for ID: {file_id}")
